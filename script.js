@@ -26,13 +26,14 @@ function getComputerChoice() {
 
 }
 
-function getPlayerChoise(playerSelection){
+function getPlayerChoise(){
     playerSelection = prompt("Rock, paper or Scissor?")
     playerSelection = playerSelection.toLowerCase();
 
     if(playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissor"){
         console.log("you wrote " + playerSelection + " I dont know what you mean, try again!")
-        getPlayerChoise(playerSelection); //ger undefined först fel ange sedan rätt
+        getPlayerChoise(); //ger undefined om fel text matas in först
+        return playerSelection;
     }
     else{
         console.log(playerSelection);
