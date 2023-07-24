@@ -1,46 +1,61 @@
 console.log("Sten sax påse");
 console.log("-------------------------");
 
-let playerSelection = "no input";
+let playerSelection = "no value";
 let computerSelection = getComputerChoice();
 let playerScore = 0;
 let computerScore = 0;
+
+// playerSelection = prompt("Rock, paper or scissor?");
 
 function getComputerChoice() {
     
   let rand = Math.floor(Math.random() * 3);
     
    if (rand == 0){
-    return("Rock");
+    return("rock");
    }
 
    else if (rand == 1) {
-    return ("Paper");
+    return ("paper");
    }
 
    else{
-    return("Scissor");
+    return("scissor");
    }
 
 }
 
-function playRound(a,b) { // Kan skippa a och b, istället direkt skriva playerSelection och computerSelection
+function getPlayerChoise(playerSelection){
+    playerSelection = prompt("Rock, paper or Scissor?")
+    playerSelection = playerSelection.toLowerCase();
 
-  a = a.toLowerCase();
-  b = b.toLowerCase();
+    if(playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissor"){
+        console.log("you wrote " + playerSelection + " I dont know what you mean, try again!")
+        getPlayerChoise(playerSelection); //ger undefined först fel ange sedan rätt
+    }
+    else{
+        console.log(playerSelection);
+        return playerSelection;
+    }
+}
 
-    if (a == b) {
+
+
+function playRound(playerSelection,computerSelection) {
+
+    if (playerSelection == computerSelection) {
         return("Draw");
     }
 
-     else if (a == "rock" && b == "scissor" || a == "scissor" && b == "paper" || a == "paper" && b == "rock"){
+     else if (playerSelection == "rock" && computerSelection == "scissor" || playerSelection == "scissor" && computerSelection == "paper" || playerSelection == "paper" && computerSelection == "rock"){
         playerScore = ++playerScore;
-        return("Player wins with " + a + " over " + b );
+        return("Player wins with " + playerSelection + " over " + computerSelection );
      }
 
      else {
         computerScore = ++computerScore;
-        return("Computer wins with " + b + " over " + a );
+        return("Computer wins with " + computerSelection + " over " + playerSelection );
 
      }
 
@@ -50,7 +65,8 @@ function game(){
 
     for(let i = 0; i < 5; i++) { 
     computerSelection = getComputerChoice();
-    playerSelection = promt("Rock, paper or scissor?");
+    playerSelection = getPlayerChoise();
+    //playerSelection = prompt("Rock, paper or scissor?");
     console.log("Round " + (i+1) + ": " + playRound(playerSelection,computerSelection));
     }
 
@@ -73,9 +89,11 @@ function game(){
 
 game();
 
+
+
 // console.log(playRound(playerSelection,computerSelection));
-console.log("Player: " + playerScore);
-console.log("Computer: " + computerScore)
+// console.log("Player: " + playerScore);
+// console.log("Computer: " + computerScore)
 
 
 
